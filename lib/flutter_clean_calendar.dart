@@ -266,7 +266,7 @@ class _CalendarState extends State<Calendar> {
               SizedBox(width: 40.0),
               Text(Utils.fullDayFormat(selectedDate)),
               IconButton(
-                onPressed: () {},
+                onPressed: null,
                 iconSize: 20.0,
                 padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
                 icon: isExpanded
