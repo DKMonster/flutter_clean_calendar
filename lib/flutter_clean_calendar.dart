@@ -83,6 +83,11 @@ class _CalendarState extends State<Calendar> {
     weekdaysTextStyle = widget?.weekdaysTextStyle ?? [];
   }
 
+  goToNewDate() {
+    print('Cool');
+    return 'ok';
+  }
+
   Widget get nameAndIconRow {
     var todayIcon;
     var leftArrow;
