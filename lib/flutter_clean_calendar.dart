@@ -13,20 +13,6 @@ class Range {
   Range(this.from, this.to);
 }
 
-class CalendarController {
-  Function(double value) _gotoDateListener;
-
-  void _addListeners(
-    Function(double value) gotoDateListener,
-  ) {
-    this._gotoDateListener = gotoDateListener;
-  }
-
-  void gotoDate(value) {
-    _gotoDateListener(value);
-  }
-}
-
 class Calendar extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
   final ValueChanged onRangeSelected;
@@ -451,6 +437,20 @@ class _CalendarState extends State<Calendar> {
     if (widget.onDateSelected != null) {
       widget.onDateSelected(day);
     }
+  }
+}
+
+class CalendarController {
+  Function(double value) _gotoDateListener;
+
+  void _addListeners(
+    Function(double value) gotoDateListener,
+  ) {
+    this._gotoDateListener = gotoDateListener;
+  }
+
+  void gotoDate(value) {
+    _gotoDateListener(value);
   }
 }
 
