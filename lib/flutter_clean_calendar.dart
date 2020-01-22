@@ -14,15 +14,15 @@ class Range {
 }
 
 class CalendarController {
-  Function(DateTime value) _gotoDateListener;
+  Function(double value) _gotoDateListener;
 
   void _addListeners(
-    Function(DateTime value) gotoDateListener,
+    Function(double value) gotoDateListener,
   ) {
     this._gotoDateListener = gotoDateListener;
   }
 
-  void gotoDate(DateTime value) {
+  void gotoDate(value) {
     _gotoDateListener(value);
   }
 }
@@ -101,7 +101,7 @@ class _CalendarState extends State<Calendar> {
     widget.controller?._addListeners(_gotoDate);
   }
 
-  void _gotoDate(DateTime value) {
+  void _gotoDate(double value) {
     print(value);
   }
 
