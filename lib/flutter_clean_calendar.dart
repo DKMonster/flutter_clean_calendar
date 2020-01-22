@@ -265,13 +265,11 @@ class _CalendarState extends State<Calendar> {
             children: <Widget>[
               SizedBox(width: 40.0),
               Text(Utils.fullDayFormat(selectedDate)),
-              IconButton(
-                onPressed: null,
-                iconSize: 20.0,
+              Container(
                 padding: EdgeInsets.symmetric(vertical: 5.0, horizontal: 10.0),
-                icon: isExpanded
-                    ? Icon(Icons.arrow_drop_up)
-                    : Icon(Icons.arrow_drop_down),
+                child: isExpanded
+                    ? Icon(Icons.arrow_drop_up, size: 20.0)
+                    : Icon(Icons.arrow_drop_down, size: 20.0),
               ),
             ],
           ),
