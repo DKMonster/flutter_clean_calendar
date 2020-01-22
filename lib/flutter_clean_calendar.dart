@@ -26,6 +26,7 @@ class Calendar extends StatefulWidget {
   final Color eventDoneColor;
   final DateTime initialDate;
   final bool isExpanded;
+  final bool showTitle;
 
   Calendar({
     this.onDateSelected,
@@ -40,6 +41,7 @@ class Calendar extends StatefulWidget {
     this.eventDoneColor,
     this.initialDate,
     this.isExpanded = false,
+    this.showTitle = true,
   });
 
   @override
@@ -55,8 +57,6 @@ class _CalendarState extends State<Calendar> {
   bool isExpanded = false;
   String displayMonth;
   DateTime get selectedDate => _selectedDate;
-
-  
 
   void initState() {
     super.initState();
@@ -76,6 +76,9 @@ class _CalendarState extends State<Calendar> {
     var todayIcon;
     var leftArrow;
     var rightArrow;
+
+    // Cancel Icon and Name
+    if (!widget.showTitle) return Container();
 
     if (widget.showArrows) {
       leftArrow = IconButton(
