@@ -29,6 +29,7 @@ class Calendar extends StatefulWidget {
   final bool showTitle;
   final List weekdaysList;
   final List weekdaysTextStyle;
+  final bool hideExpandedHeader;
 
   Calendar({
     this.onDateSelected,
@@ -46,6 +47,7 @@ class Calendar extends StatefulWidget {
     this.showTitle = true,
     this.weekdaysList,
     this.weekdaysTextStyle,
+    this.hideExpandedHeader = false,
   });
 
   @override
@@ -252,7 +254,7 @@ class _CalendarState extends State<Calendar> {
   }
 
   Widget get expansionButtonRow {
-    if (widget.isExpandable) {
+    if (widget.isExpandable && !widget.hideExpandedHeader) {
       return GestureDetector(
         onTap: toggleExpanded,
         child: Container(
