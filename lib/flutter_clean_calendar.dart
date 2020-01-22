@@ -27,6 +27,7 @@ class Calendar extends StatefulWidget {
   final DateTime initialDate;
   final bool isExpanded;
   final bool showTitle;
+  final List weekdaysList;
 
   Calendar({
     this.onDateSelected,
@@ -42,6 +43,7 @@ class Calendar extends StatefulWidget {
     this.initialDate,
     this.isExpanded = false,
     this.showTitle = true,
+    this.weekdaysList,
   });
 
   @override
@@ -57,6 +59,7 @@ class _CalendarState extends State<Calendar> {
   bool isExpanded = false;
   String displayMonth;
   DateTime get selectedDate => _selectedDate;
+  List weekdaysList = [];
 
   void initState() {
     super.initState();
@@ -70,6 +73,8 @@ class _CalendarState extends State<Calendar> {
             .toList()
             .sublist(0, 7);
     displayMonth = Utils.formatMonth(_selectedDate);
+
+    weekdaysList = widget?.weekdaysList ?? Utils.weekdays;
   }
 
   Widget get nameAndIconRow {
@@ -153,7 +158,7 @@ class _CalendarState extends State<Calendar> {
     List<DateTime> calendarDays =
         isExpanded ? selectedMonthsDays : selectedWeeksDays;
 
-    Utils.weekdays.forEach(
+    weekdaysList.forEach(
       (day) {
         dayWidgets.add(
           CalendarTile(
