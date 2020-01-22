@@ -87,10 +87,6 @@ class _CalendarState extends State<Calendar> {
     widget.controller?._addListeners(_gotoDate);
   }
 
-  void _gotoDate(double value) {
-    print(value);
-  }
-
   Widget get nameAndIconRow {
     var todayIcon;
     var leftArrow;
@@ -309,6 +305,22 @@ class _CalendarState extends State<Calendar> {
     );
   }
 
+  void _gotoDate(DateTime value) {
+    _selectedDate = value;
+    var firstDayOfCurrentWeek = Utils.firstDayOfWeek(_selectedDate);
+    var lastDayOfCurrentWeek = Utils.lastDayOfWeek(_selectedDate);
+
+    setState(() {
+      selectedWeeksDays =
+          Utils.daysInRange(firstDayOfCurrentWeek, lastDayOfCurrentWeek)
+              .toList();
+      selectedMonthsDays = Utils.daysInMonth(_selectedDate);
+      displayMonth = Utils.formatMonth(_selectedDate);
+    });
+
+    _launchDateSelectionCallback(_selectedDate);
+  }
+
   void resetToToday() {
     _selectedDate = DateTime.now();
     var firstDayOfCurrentWeek = Utils.firstDayOfWeek(_selectedDate);
@@ -441,15 +453,15 @@ class _CalendarState extends State<Calendar> {
 }
 
 class CalendarController {
-  Function(double value) _gotoDateListener;
+  Function(DateTime value) _gotoDateListener;
 
   void _addListeners(
-    Function(double value) gotoDateListener,
+    Function(DateTime value) gotoDateListener,
   ) {
     this._gotoDateListener = gotoDateListener;
   }
 
-  void gotoDate(value) {
+  void gotoDate(DateTime value) {
     _gotoDateListener(value);
   }
 }
