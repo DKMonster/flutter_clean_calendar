@@ -13,6 +13,20 @@ class Range {
   Range(this.from, this.to);
 }
 
+class CalendarController {
+  Function _gotoDateListener;
+
+  void _addListeners(
+    Function gotoDateListener,
+  ) {
+    this._gotoDateListener = gotoDateListener;
+  }
+
+  void gotoDate(value) {
+    _gotoDateListener();
+  }
+}
+
 class Calendar extends StatefulWidget {
   final ValueChanged<DateTime> onDateSelected;
   final ValueChanged onRangeSelected;
@@ -30,6 +44,7 @@ class Calendar extends StatefulWidget {
   final List weekdaysList;
   final List weekdaysTextStyle;
   final bool hideExpandedHeader;
+  final CalendarController controller;
 
   Calendar({
     this.onDateSelected,
@@ -48,6 +63,7 @@ class Calendar extends StatefulWidget {
     this.weekdaysList,
     this.weekdaysTextStyle,
     this.hideExpandedHeader = false,
+    this.controller,
   });
 
   @override
@@ -81,11 +97,12 @@ class _CalendarState extends State<Calendar> {
 
     weekdaysList = widget?.weekdaysList ?? Utils.weekdays;
     weekdaysTextStyle = widget?.weekdaysTextStyle ?? [];
+
+    widget.controller?._addListeners(_gotoDate);
   }
 
-  goToNewDate() {
-    print('Cool');
-    return 'ok';
+  void _gotoDate(value) {
+    print(value);
   }
 
   Widget get nameAndIconRow {
