@@ -28,6 +28,7 @@ class Calendar extends StatefulWidget {
   final bool isExpanded;
   final bool showTitle;
   final List weekdaysList;
+  final List weekdaysTextStyle;
 
   Calendar({
     this.onDateSelected,
@@ -44,6 +45,7 @@ class Calendar extends StatefulWidget {
     this.isExpanded = false,
     this.showTitle = true,
     this.weekdaysList,
+    this.weekdaysTextStyle,
   });
 
   @override
@@ -60,6 +62,7 @@ class _CalendarState extends State<Calendar> {
   String displayMonth;
   DateTime get selectedDate => _selectedDate;
   List weekdaysList = [];
+  List weekdaysTextStyle = [];
 
   void initState() {
     super.initState();
@@ -75,6 +78,7 @@ class _CalendarState extends State<Calendar> {
     displayMonth = Utils.formatMonth(_selectedDate);
 
     weekdaysList = widget?.weekdaysList ?? Utils.weekdays;
+    weekdaysTextStyle = widget?.weekdaysTextStyle ?? [];
   }
 
   Widget get nameAndIconRow {
@@ -158,20 +162,23 @@ class _CalendarState extends State<Calendar> {
     List<DateTime> calendarDays =
         isExpanded ? selectedMonthsDays : selectedWeeksDays;
 
-    weekdaysList.forEach(
-      (day) {
-        dayWidgets.add(
-          CalendarTile(
-            selectedColor: widget.selectedColor,
-            eventColor: widget.eventColor,
-            eventDoneColor: widget.eventDoneColor,
-            events: widget.events[day],
-            isDayOfWeek: true,
-            dayOfWeek: day,
-          ),
+    weekdaysList.asMap().forEach(
+          (index, day) => {
+            dayWidgets.add(
+              CalendarTile(
+                selectedColor: widget.selectedColor,
+                eventColor: widget.eventColor,
+                eventDoneColor: widget.eventDoneColor,
+                events: widget.events[day],
+                isDayOfWeek: true,
+                dayOfWeek: day,
+                dayOfWeekStyles: (weekdaysTextStyle.length != 0)
+                    ? weekdaysTextStyle[index]
+                    : null,
+              ),
+            )
+          },
         );
-      },
-    );
 
     bool monthStarted = false;
     bool monthEnded = false;
