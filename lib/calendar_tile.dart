@@ -50,7 +50,8 @@ class CalendarTile extends StatelessWidget {
         child: Container(
           decoration: isSelected
               ? BoxDecoration(
-                  shape: BoxShape.circle,
+                  // shape: BoxShape.circle,
+                  borderRadius: BorderRadius.circular(20.0),
                   color: selectedColor != null
                       ? selectedColor
                       : Theme.of(context).primaryColor,
