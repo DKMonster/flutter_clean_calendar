@@ -31,6 +31,7 @@ class Calendar extends StatefulWidget {
   final List weekdaysTextStyle;
   final bool hideExpandedHeader;
   final CalendarController controller;
+  final bool selectTextInvertColor;
 
   Calendar({
     this.onDateSelected,
@@ -50,6 +51,7 @@ class Calendar extends StatefulWidget {
     this.weekdaysTextStyle,
     this.hideExpandedHeader = false,
     this.controller,
+    this.selectTextInvertColor = false,
   });
 
   @override
@@ -67,6 +69,7 @@ class _CalendarState extends State<Calendar> {
   DateTime get selectedDate => _selectedDate;
   List weekdaysList = [];
   List weekdaysTextStyle = [];
+  bool selectTextInvertColor = false;
 
   void initState() {
     super.initState();
@@ -85,6 +88,8 @@ class _CalendarState extends State<Calendar> {
     weekdaysTextStyle = widget?.weekdaysTextStyle ?? [];
 
     widget.controller?._addListeners(_gotoDate);
+
+    selectTextInvertColor = widget?.selectTextInvertColor ?? false;
   }
 
   Widget get nameAndIconRow {
@@ -220,15 +225,17 @@ class _CalendarState extends State<Calendar> {
         } else {
           dayWidgets.add(
             CalendarTile(
-                selectedColor: widget.selectedColor,
-                eventColor: widget.eventColor,
-                eventDoneColor: widget.eventDoneColor,
-                events: widget.events[day],
-                onDateSelected: () => handleSelectedDateAndUserCallback(day),
-                date: day,
-                dateStyles: configureDateStyle(monthStarted, monthEnded),
-                isSelected: Utils.isSameDay(selectedDate, day),
-                inMonth: day.month == selectedDate.month),
+              selectedColor: widget.selectedColor,
+              eventColor: widget.eventColor,
+              eventDoneColor: widget.eventDoneColor,
+              events: widget.events[day],
+              onDateSelected: () => handleSelectedDateAndUserCallback(day),
+              date: day,
+              dateStyles: configureDateStyle(monthStarted, monthEnded),
+              isSelected: Utils.isSameDay(selectedDate, day),
+              inMonth: day.month == selectedDate.month,
+              selectTextInvertColor: selectTextInvertColor,
+            ),
           );
         }
       },

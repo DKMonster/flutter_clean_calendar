@@ -15,6 +15,7 @@ class CalendarTile extends StatelessWidget {
   final Color selectedColor;
   final Color eventColor;
   final Color eventDoneColor;
+  final bool selectTextInvertColor;
 
   CalendarTile({
     this.onDateSelected,
@@ -30,6 +31,7 @@ class CalendarTile extends StatelessWidget {
     this.selectedColor,
     this.eventColor,
     this.eventDoneColor,
+    this.selectTextInvertColor = false,
   });
 
   Widget renderDateOrDayOfWeek(BuildContext context) {
@@ -64,9 +66,12 @@ class CalendarTile extends StatelessWidget {
               Text(
                 Utils.formatDay(date).toString(),
                 style: TextStyle(
-                    fontSize: 14.0,
-                    fontWeight: FontWeight.w400,
-                    color: inMonth ? Colors.black : Colors.grey),
+                  fontSize: 14.0,
+                  fontWeight: FontWeight.w400,
+                  color: inMonth
+                      ? Colors.black
+                      : selectTextInvertColor ? Colors.white : Colors.grey,
+                ),
               ),
               events != null && events.length > 0
                   ? Row(
