@@ -68,9 +68,9 @@ class CalendarTile extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 14.0,
                   fontWeight: FontWeight.w400,
-                  color: inMonth
-                      ? Colors.black
-                      : selectTextInvertColor ? Colors.white : Colors.grey,
+                  color: (isSelected && selectTextInvertColor)
+                      ? Colors.white
+                      : inMonth ? Colors.black : Colors.grey,
                 ),
               ),
               events != null && events.length > 0
